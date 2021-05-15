@@ -11,8 +11,7 @@ test('FormLogin renders', () => {
 })
 
 test('Submitting the form calls onSubmit with username and password', () => {
-    let submittedData
-    const handleSubmit = (data) => { submittedData = data}
+    const handleSubmit = jest.fn()
     render(<FormLogin onSubmit={handleSubmit} />)
     const username = 'pleopleo'
     const password = '123456'
@@ -20,8 +19,9 @@ test('Submitting the form calls onSubmit with username and password', () => {
     userEvent.type(screen.getByLabelText(/username:/i), username)
     userEvent.type(screen.getByLabelText(/password:/i), password)
     userEvent.click(screen.getByRole('button', { name: /submit/i }))
-    expect(submittedData).toEqual({
+    expect(handleSubmit).toHaveBeenCalledWith({
         username,
         password,
     })
+    expect(handleSubmit).toHaveBeenCalledTimes(1)
 })

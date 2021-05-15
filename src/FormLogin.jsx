@@ -14,6 +14,7 @@ const FormLogin = ({ onSubmit }) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
+
         onSubmit({
             username,
             password
@@ -21,7 +22,7 @@ const FormLogin = ({ onSubmit }) => {
     }
 
     return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} style={{ padding: '2rem'}}>
     <h1>Login</h1>
         <div>
             <div>
