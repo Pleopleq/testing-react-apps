@@ -1,6 +1,7 @@
 import './App.css';
 import FormLogin from './FormLogin'
 import Counter from './Counter'
+import ColorButton from './ColorButton'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div>
         <Counter></Counter>
       </div>
+      <ColorButton></ColorButton>
     </div>
   )
 }
