@@ -10,19 +10,6 @@ test('initial conditions', () => {
     expect(checkBox).not.toBeChecked()
 })
 
-test('disable/enable the color button', () => {
-    render(<ColorButton></ColorButton>)
-    const colorButton = screen.getByRole('button', { name: 'Change to blue' })
-    const checkBox = screen.getByRole('checkbox')
-
-    expect(colorButton).toBeEnabled()
-    userEvent.click(checkBox)
-    expect(colorButton).toBeDisabled()
-    userEvent.click(checkBox)
-    expect(colorButton).toBeEnabled()
-    
-})
-
 test('button has correct initial color', () => {
     render(<ColorButton/>)
     const colorButton = screen.getByRole('button', { name: 'Change to blue' })
@@ -36,3 +23,34 @@ test('button turn blue when clicked', () => {
     expect(colorButton).toHaveStyle({ backgroundColor: 'blue'})
 })
 
+test('disable/enable the color button', () => {
+    render(<ColorButton></ColorButton>)
+    const colorButton = screen.getByRole('button', { name: 'Change to blue' })
+    const checkBox = screen.getByRole('checkbox', { name: 'Disable button'})
+
+    expect(colorButton).toBeEnabled()
+    userEvent.click(checkBox)
+    expect(colorButton).toBeDisabled()
+    userEvent.click(checkBox)
+    expect(colorButton).toBeEnabled()
+})
+
+test('Disable button makes the button gray but stay in the correct color when enables it', () => {
+    render(<ColorButton></ColorButton>)
+    const colorButton = screen.getByRole('button', { name: 'Change to blue' })
+    const checkBox = screen.getByRole('checkbox', { name: 'Disable button' })
+
+    //Button is gray when disabled and red when enabled.
+    userEvent.click(checkBox)
+    expect(colorButton).toBeDisabled()
+    expect(colorButton).toHaveStyle({ backgroundColor: 'gray' })
+    userEvent.click(checkBox)
+    expect(colorButton).toHaveStyle({ backgroundColor: 'red' })
+
+    //Button is clicked first, then is disabled, button is gray. Click the checkbox to enable button and button is blue.
+    userEvent.click(colorButton)
+    userEvent.click(checkBox)
+    expect(colorButton).toHaveStyle({ backgroundColor: 'gray' })
+    userEvent.click(checkBox)
+    expect(colorButton).toHaveStyle({ backgroundColor: 'blue' })
+})

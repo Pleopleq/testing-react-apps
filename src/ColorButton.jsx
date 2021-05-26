@@ -12,8 +12,17 @@ const ColorButton = () => {
 
     return (
         <div>
-            <button style={{ backgroundColor: color }} onClick={handleOnClick} disabled={isDisabled}>Change to {newButtonColor}</button>
-            <input type='checkbox' onChange={(e) => setIsDisabled(e.target.checked)}></input>
+            <button
+                style={{ backgroundColor: isDisabled ? 'gray' : color }} 
+                onClick={handleOnClick}
+                disabled={isDisabled}>
+                Change to {newButtonColor}
+            </button>
+            <label htmlFor="disable-color-button">Disable button</label>
+            <input 
+                type='checkbox' onChange={(e) => setIsDisabled(e.target.checked)}
+                id="disable-color-button"> 
+            </input>
         </div>
     )
 }
