@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render,screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ColorButton from './ColorButton'
 
@@ -28,7 +28,7 @@ test('disable/enable the color button', () => {
     const colorButton = screen.getByRole('button', { name: 'Change to blue' })
     const checkBox = screen.getByRole('checkbox', { name: 'Disable button'})
 
-    expect(colorButton).toBeEnabled()
+    expect(colorButton).toBeDisabled()
     userEvent.click(checkBox)
     expect(colorButton).toBeDisabled()
     userEvent.click(checkBox)
